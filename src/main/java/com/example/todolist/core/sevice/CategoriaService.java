@@ -1,6 +1,7 @@
 package com.example.todolist.core.sevice;
 
-import com.example.todolist.core.business.CategoriaNotFoundExcepition;
+import com.example.todolist.core.business.excepition.CategoriaException;
+import com.example.todolist.core.business.validation.CategoriaValidation;
 import com.example.todolist.core.persistence.CategoriaRepository;
 import com.example.todolist.domain.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,28 @@ public class CategoriaService {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+    @Autowired
+    private CategoriaValidation categoriaValidation;
 
 
     public Categoria saveCategoria (Categoria categoria){
+        StringBuilder erroMenssage = new StringBuilder();
+        if(!categoriaValidation.isValidCategoriaName(categoria.getNome(), erroMenssage)){
+            throw new CategoriaException(erroMenssage);
+        }else{
+            if(categoriaValidation.ExistCategoria(categoria, erroMenssage)){
+                throw new CategoriaException(erroMenssage);
+            }
+        }
         return categoriaRepository.save(categoria);
     }
 
     public Optional<Categoria> findCategoria (Long id){
-        return categoriaRepository.findById(id);
+        if(categoriaRepository.existsById(id)){
+            return categoriaRepository.findById(id);
+        }else{
+            throw new CategoriaException("Categoria não existe");
+        }
     }
 
     public List<Categoria> getAllCategoria() {
@@ -29,10 +44,19 @@ public class CategoriaService {
     }
 
     public Categoria updateCategoria (Categoria categoria){
-        if(categoriaRepository.existsById(categoria.getId_categoria())){
-            return categoriaRepository.save(categoria);
+        StringBuilder erroMenssage = new StringBuilder();
+        if(!categoriaValidation.ExistCategoria(categoria, erroMenssage)){
+            throw new CategoriaException(erroMenssage);
         }else{
-            throw new CategoriaNotFoundExcepition("Categoria não existe");
+            return categoriaRepository.save(categoria);
+        }
+    }
+
+    public void deleteCategoria(Long id){
+        if(categoriaRepository.existsById(id)){
+           categoriaRepository.deleteById(id);
+        }else{
+            throw new CategoriaException("Categoria não existe");
         }
     }
 
