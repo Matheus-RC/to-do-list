@@ -21,12 +21,8 @@ public class CategoriaService {
 
     public Categoria saveCategoria (Categoria categoria){
         StringBuilder erroMenssage = new StringBuilder();
-        if(!categoriaValidation.isValidCategoriaName(categoria.getNome(), erroMenssage)){
+       if(!categoriaValidation.isValidCategoriaName(categoria.getNome(), erroMenssage)){
             throw new CategoriaException(erroMenssage);
-        }else{
-            if(categoriaValidation.ExistCategoria(categoria, erroMenssage)){
-                throw new CategoriaException(erroMenssage);
-            }
         }
         return categoriaRepository.save(categoria);
     }
@@ -45,11 +41,16 @@ public class CategoriaService {
 
     public Categoria updateCategoria (Categoria categoria){
         StringBuilder erroMenssage = new StringBuilder();
-        if(!categoriaValidation.ExistCategoria(categoria, erroMenssage)){
+        if(!categoriaValidation.validaUpdateCategoria(categoria, erroMenssage)){
             throw new CategoriaException(erroMenssage);
         }else{
-            return categoriaRepository.save(categoria);
+            if(!categoriaValidation.isValidCategoriaName(categoria.getNome(), erroMenssage)) {
+                throw new CategoriaException(erroMenssage);
+            }else{
+                return categoriaRepository.save(categoria);
+            }
         }
+
     }
 
     public void deleteCategoria(Long id){

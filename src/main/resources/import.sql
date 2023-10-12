@@ -1,2 +1,2 @@
-INSERT INTO categoria (categoria) VALUES ('Estudos');
-INSERT INTO categoria (categoria) VALUES ('Trabalho');
+INSERT INTO categoria (nome) VALUES ('Estudos');
+INSERT INTO categoria (nome) VALUES ('Trabalho');

@@ -2,7 +2,7 @@ package com.example.todolist.core.business.excepition;
 
 public class PrioridadeException extends RuntimeException{
     public PrioridadeException(StringBuilder erroMenssage){
-        super();
+        super(String.valueOf(erroMenssage));
     }
 
     public PrioridadeException(String message){

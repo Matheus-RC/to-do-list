@@ -38,22 +38,27 @@ public class CategoriaController {
 
     @PostMapping
     public ResponseEntity<?> createCategoria(@RequestBody Categoria categoria){
-        Categoria categoriaNew = categoriaService.saveCategoria(categoria);
-        if(categoriaNew != null){
-            return ResponseEntity.ok(categoriaNew);
-        }else{
-            return ResponseEntity.notFound().build();
+        try{
+            categoriaService.saveCategoria(categoria);
+            return new ResponseEntity<>("Categoria salva com sucesso", HttpStatus.OK);
+        }catch (CategoriaException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping
-    public ResponseEntity<Categoria> updateCategoria(@RequestBody Categoria categoria){
-        Categoria categoriaUpdate = categoriaService.updateCategoria(categoria);
-        if(categoriaUpdate != null){
-            return ResponseEntity.ok(categoriaUpdate);
-        }else{
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<?> updateCategoria(@RequestBody Categoria categoria){
+        try{
+            categoriaService.updateCategoria(categoria);
+            return new ResponseEntity<>("Categoria atualizada com sucesso!", HttpStatus.OK);
+        }catch (CategoriaException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (Exception e){
+            return new ResponseEntity<>( e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 
     @DeleteMapping("/{id}")

@@ -13,5 +13,5 @@ public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_status;
-    private String status;
+    private String nome;
 }

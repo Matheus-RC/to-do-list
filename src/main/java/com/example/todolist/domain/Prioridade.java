@@ -12,5 +12,5 @@ public class Prioridade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_prioridade;
-    private String prioridade;
+    private String classificacao;
 }

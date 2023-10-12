@@ -2,7 +2,7 @@ package com.example.todolist.core.business.excepition;
 
 public class TaskException extends RuntimeException{
     public TaskException(StringBuilder erroMenssage){
-        super();
+        super(String.valueOf(erroMenssage));
     }
 
     public TaskException(String message){

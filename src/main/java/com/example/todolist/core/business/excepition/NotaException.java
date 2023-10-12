@@ -3,7 +3,7 @@ package com.example.todolist.core.business.excepition;
 public class NotaException extends RuntimeException{
 
     public NotaException(StringBuilder erroMenssage){
-        super();
+        super(String.valueOf(erroMenssage));
     }
 
     public NotaException(String message){

@@ -3,7 +3,7 @@ package com.example.todolist.core.business.excepition;
 public class CategoriaException extends RuntimeException{
 
     public CategoriaException(StringBuilder erroMenssage){
-        super();
+        super(String.valueOf(erroMenssage));
     }
 
     public CategoriaException(String message){
