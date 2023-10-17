@@ -20,19 +20,14 @@ public class CategoriaService {
 
 
     public Categoria saveCategoria (Categoria categoria){
-        StringBuilder erroMenssage = new StringBuilder();
-       if(!categoriaValidation.isValidCategoriaName(categoria.getNome(), erroMenssage)){
-            throw new CategoriaException(erroMenssage);
-        }
+        categoriaValidation.validCategoriaName(categoria.getNome());
+        categoriaValidation.validNameExist(categoria);
         return categoriaRepository.save(categoria);
     }
 
     public Optional<Categoria> findCategoria (Long id){
-        if(categoriaRepository.existsById(id)){
-            return categoriaRepository.findById(id);
-        }else{
-            throw new CategoriaException("Categoria não existe");
-        }
+        categoriaValidation.validaIdExist(id);
+        return categoriaRepository.findById(id);
     }
 
     public List<Categoria> getAllCategoria() {
@@ -40,26 +35,15 @@ public class CategoriaService {
     }
 
     public Categoria updateCategoria (Categoria categoria){
-        StringBuilder erroMenssage = new StringBuilder();
-        if(!categoriaValidation.validaUpdateCategoria(categoria, erroMenssage)){
-            throw new CategoriaException(erroMenssage);
-        }else{
-            if(!categoriaValidation.isValidCategoriaName(categoria.getNome(), erroMenssage)) {
-                throw new CategoriaException(erroMenssage);
-            }else{
-                return categoriaRepository.save(categoria);
-            }
-        }
-
+        categoriaValidation.validaIdExist(categoria.getId_categoria());
+        categoriaValidation.validCategoriaName(categoria.getNome());
+        categoriaValidation.validNameExist(categoria);
+        return categoriaRepository.save(categoria);
     }
 
     public void deleteCategoria(Long id){
-        if(categoriaRepository.existsById(id)){
-           categoriaRepository.deleteById(id);
-        }else{
-            throw new CategoriaException("Categoria não existe");
-        }
+        categoriaValidation.validaIdExist(id);
+        categoriaRepository.deleteById(id);
     }
-
 
 }
