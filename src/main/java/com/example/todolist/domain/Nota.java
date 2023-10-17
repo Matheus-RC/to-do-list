@@ -9,7 +9,7 @@ public class Nota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_nota;
-    private String nota;
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(name ="id_task")

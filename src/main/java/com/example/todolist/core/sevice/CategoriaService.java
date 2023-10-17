@@ -19,10 +19,10 @@ public class CategoriaService {
     private CategoriaValidation categoriaValidation;
 
 
-    public Categoria saveCategoria (Categoria categoria){
+    public void saveCategoria (Categoria categoria){
         categoriaValidation.validCategoriaName(categoria.getNome());
         categoriaValidation.validNameExist(categoria);
-        return categoriaRepository.save(categoria);
+        categoriaRepository.save(categoria);
     }
 
     public Optional<Categoria> findCategoria (Long id){
@@ -34,11 +34,11 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Categoria updateCategoria (Categoria categoria){
+    public void updateCategoria (Categoria categoria){
         categoriaValidation.validaIdExist(categoria.getId_categoria());
         categoriaValidation.validCategoriaName(categoria.getNome());
         categoriaValidation.validNameExist(categoria);
-        return categoriaRepository.save(categoria);
+        categoriaRepository.save(categoria);
     }
 
     public void deleteCategoria(Long id){

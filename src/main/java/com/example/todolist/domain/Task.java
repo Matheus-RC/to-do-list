@@ -18,6 +18,7 @@ public class Task {
     private Date data_vencimento;
 
     @OneToMany
+    @JoinColumn(name ="id_task")
     private List<Nota> nota;
     @OneToOne
     private Categoria categoria;

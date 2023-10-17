@@ -33,6 +33,4 @@ public class CategoriaValidation {
             throw new CategoriaException("Id da categoria não existe!");
         }
     }
-
-
 }

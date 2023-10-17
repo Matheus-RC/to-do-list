@@ -17,17 +17,19 @@ import java.util.Optional;
 public class CategoriaController {
 
     @Autowired
-    CategoriaService categoriaService = new CategoriaService();
+    CategoriaService categoriaService;
 
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> getCategoria(@PathVariable Long id){
-        Optional<Categoria> categoriaOptional = categoriaService.findCategoria(id);
-        if(categoriaOptional.isEmpty()){
-            return ResponseEntity.notFound().build();
-        }else{
+    public ResponseEntity<?> getCategoria(@PathVariable Long id){
+        try{
+            Optional<Categoria> categoriaOptional = categoriaService.findCategoria(id);
             return ResponseEntity.ok(categoriaOptional.get());
+        }catch (CategoriaException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -69,7 +71,7 @@ public class CategoriaController {
        }catch (CategoriaException e){
            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
        }catch (Exception e){
-            return new ResponseEntity<>("Ocorreu um erro ao excluir a categoria", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
        }
     }
 
