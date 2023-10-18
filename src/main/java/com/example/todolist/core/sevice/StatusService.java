@@ -34,7 +34,7 @@ public class StatusService {
     }
 
     public void updateStatus (Status status){
-        statusValidation.validaIdExist(status.getId_status()));
+        statusValidation.validaIdExist(status.getId_status());
         statusValidation.validStatusName(status.getName());
         statusValidation.validNameExistWithAnotherId(status);
         statusRepository.save(status);
