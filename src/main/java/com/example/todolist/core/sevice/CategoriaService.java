@@ -37,7 +37,7 @@ public class CategoriaService {
     public void updateCategoria (Categoria categoria){
         categoriaValidation.validaIdExist(categoria.getId_categoria());
         categoriaValidation.validCategoriaName(categoria.getNome());
-        categoriaValidation.validNameExist(categoria);
+        categoriaValidation.validNameExistWithAnotherId(categoria);
         categoriaRepository.save(categoria);
     }
 

@@ -17,8 +17,7 @@ public class Task {
     private Date data_conclusao;
     private Date data_vencimento;
 
-    @OneToMany
-    @JoinColumn(name ="id_task")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Nota> nota;
     @OneToOne
     private Categoria categoria;

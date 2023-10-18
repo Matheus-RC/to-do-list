@@ -22,8 +22,14 @@ public class CategoriaValidation {
         }
     }
 
+    public void validNameExistWithAnotherId(Categoria categoria){
+        if(categoriaRepository.findExistNameWithIdCategoria(categoria.getNome(), categoria.getId_categoria()).size() > 0){
+            throw new CategoriaException("Nome da categoria já existe!");
+        }
+    }
+
     public void validNameExist(Categoria categoria){
-        if(categoriaRepository.findExistNameCategoria(categoria.getNome(), categoria.getId_categoria()).size() > 0){
+        if(categoriaRepository.findCategoriaByName(categoria.getNome()).size() > 0){
             throw new CategoriaException("Nome da categoria já existe!");
         }
     }

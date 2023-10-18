@@ -38,7 +38,7 @@ public class PrioridadeService {
     public void updatePrioridade (Prioridade prioridade){
         prioridadeValidation.validaIdExist(prioridade.getId_prioridade());
         prioridadeValidation.validPrioridadeName(prioridade.getName());
-        prioridadeValidation.validNameExist(prioridade);
+        prioridadeValidation.validNameExistWithAnotherId(prioridade);
         prioridadeRepository.save(prioridade);
     }
 
