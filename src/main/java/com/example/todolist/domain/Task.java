@@ -12,6 +12,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_task;
+    private String name;
     private String descricao;
     private Date data_criacao;
     private Date data_conclusao;
@@ -25,5 +26,10 @@ public class Task {
     private Prioridade prioridade;
     @OneToOne
     private Status status;
+
+    @PrePersist
+    public void prePersist() {
+        this.data_criacao = new Date();
+    }
 
 }

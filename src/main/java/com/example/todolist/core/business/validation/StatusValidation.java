@@ -7,7 +7,9 @@ import com.example.todolist.core.persistence.StatusRepository;
 import com.example.todolist.domain.Prioridade;
 import com.example.todolist.domain.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class StatusValidation {
     @Autowired
     private StatusRepository statusRepository;
