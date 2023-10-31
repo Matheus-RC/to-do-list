@@ -18,5 +18,4 @@ public class Categoria {
     @JsonIgnore
     List<Task> task;
 
-
 }
