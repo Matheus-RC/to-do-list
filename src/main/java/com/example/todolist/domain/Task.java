@@ -20,11 +20,11 @@ public class Task {
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Nota> nota;
-    @OneToOne
+    @ManyToOne
     private Categoria categoria;
-    @OneToOne
+    @ManyToOne
     private Prioridade prioridade;
-    @OneToOne
+    @ManyToOne
     private Status status;
 
     @PrePersist

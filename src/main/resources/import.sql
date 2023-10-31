@@ -6,3 +6,5 @@ INSERT INTO nota (descricao) VALUES ('Terminos previsto adiantado');
 
 INSERT INTO prioridade (name) VALUES ('Alta');
 INSERT INTO prioridade (name) VALUES ('Baixa');
+
+INSERT INTO status (name) VALUES ('INICIADO');

@@ -18,7 +18,7 @@ public class TaskService {
     private TaskValidation taskValidation;
 
 
-    public void saveStatus (Task task){
+    public void saveTask (Task task){
         taskValidation.validTaskName(task.getName());
         taskRepository.save(task);
     }
