@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,9 +60,15 @@ public class CategoriaValidationTest {
         assertEquals("O nome da categoria precisa ter no minímo 3 caracteres!", exception.getMessage());
 
     }
+    @Test
+    public void testValidNameValid(){
+        String name = "teste";
+        categoriaValidation.validCategoriaName(name);
+    }
+
 
     @Test
-    public void testvalidNameExistWithAnotherId(){
+    public void testValidNameExistWithAnotherId(){
         when(categoriaRepository.findExistNameWithIdCategoria(categoriaMock.getNome(), categoriaMock.getId_categoria()))
                 .thenReturn(Collections.singletonList(new Categoria(2L, "Categoria", new ArrayList<>())));
 
@@ -70,7 +77,42 @@ public class CategoriaValidationTest {
 
     }
 
+    @Test
+    public void testValidNameDontExistWithAnotherId(){
+        when(categoriaRepository.findExistNameWithIdCategoria(categoriaMock.getNome(), categoriaMock.getId_categoria()))
+                .thenReturn(new ArrayList<>());
 
+        categoriaValidation.validNameExistWithAnotherId(categoriaMock);
+    }
 
+    @Test
+    public void testValidNameExist(){
+        when(categoriaRepository.findCategoriaByName(categoriaMock.getNome())).thenReturn(Collections.singletonList(categoriaMock));
+
+        CategoriaException exception = assertThrows(CategoriaException.class, () -> categoriaValidation.validNameExist(categoriaMock));
+        assertEquals("Nome da categoria já existe!", exception.getMessage());
+    }
+
+    @Test
+    public void testValidNameDontExist(){
+        when(categoriaRepository.findCategoriaByName(categoriaMock.getNome())).thenReturn(new ArrayList<>());
+
+       categoriaValidation.validNameExist(categoriaMock);
+    }
+
+    @Test
+    public void testValidIdExist(){
+        when(categoriaRepository.existsById(categoriaMock.getId_categoria())).thenReturn(false);
+
+        CategoriaException exception = assertThrows(CategoriaException.class, () -> categoriaValidation.validaIdExist(categoriaMock.getId_categoria()));
+        assertEquals("Id da categoria não existe!", exception.getMessage());
+    }
+
+    @Test
+    public void testValidIdDontExist(){
+        when(categoriaRepository.existsById(categoriaMock.getId_categoria())).thenReturn(true);
+
+        categoriaValidation.validaIdExist(categoriaMock.getId_categoria());
+    }
 
 }
