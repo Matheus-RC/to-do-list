@@ -1,12 +1,15 @@
 package com.example.todolist.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
 @Data
 public class Task {
     @Id

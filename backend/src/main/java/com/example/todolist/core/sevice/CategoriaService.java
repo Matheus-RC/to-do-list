@@ -30,6 +30,7 @@ public class CategoriaService {
         return categoriaRepository.findById(id);
     }
 
+
     public List<Categoria> getAllCategoria() {
         return categoriaRepository.findAll();
     }
