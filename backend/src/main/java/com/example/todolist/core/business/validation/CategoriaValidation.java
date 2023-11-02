@@ -16,9 +16,10 @@ public class CategoriaValidation {
     public void validCategoriaName(String name){
         if(name == null || name.isEmpty()) {
             throw new CategoriaException("O nome da categoria não pode ser vazio!");
-        }
-        if(name.length() < 3) {
-            throw new CategoriaException("O nome da categoria precisa ter no minímo 3 caracteres!");
+        }else{
+            if(name.length() < 3) {
+                throw new CategoriaException("O nome da categoria precisa ter no minímo 3 caracteres!");
+            }
         }
     }
 

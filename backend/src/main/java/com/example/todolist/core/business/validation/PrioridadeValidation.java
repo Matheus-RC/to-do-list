@@ -15,9 +15,10 @@ public class PrioridadeValidation {
     public void validPrioridadeName(String name){
         if(name == null || name.isEmpty()) {
             throw new PrioridadeException("O nome da prioridade não pode ser vazio!");
-        }
-        if(name.length() < 3) {
-            throw new PrioridadeException("O nome da prioridade precisa ter no minímo 3 caracteres!");
+        }else{
+            if(name.length() < 3) {
+                throw new PrioridadeException("O nome da prioridade precisa ter no minímo 3 caracteres!");
+            }
         }
     }
 

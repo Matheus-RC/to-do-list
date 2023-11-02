@@ -16,12 +16,10 @@ public class StatusValidation {
     public void isValidStatusName(String nome){
         if(nome == null || nome.isEmpty()) {
             throw  new StatusException("O nome do status não pode ser vazio!");
-        }
-        if(nome.length() < 3) {
-            throw  new StatusException("O nome do status precisa ter no minimo 3 caracteres!");
-        }
-        if(statusRepository.findStatusByName(nome).size() > 0){
-            throw  new StatusException("O nome do status já existe!");
+        }else {
+            if (nome.length() < 3) {
+                throw new StatusException("O nome do status precisa ter no minimo 3 caracteres!");
+            }
         }
     }
 

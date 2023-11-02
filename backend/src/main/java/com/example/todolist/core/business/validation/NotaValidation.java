@@ -13,16 +13,17 @@ public class NotaValidation {
     private NotaRepository notaRepository;
 
     public void validNotaContent(String descricao){
-        if(descricao == null){
-            new NotaException("A nota não pode ser vazia!");
-        }
-        if(descricao.length() < 3){
-            new NotaException("A nota deve conter mais do que 3 caracteres!");
+        if(descricao == null || descricao.isEmpty()){
+            throw new NotaException("A nota não pode ser vazia!");
+        }else{
+            if(descricao.length() < 3){
+                throw new NotaException("A nota deve conter mais do que 3 caracteres!");
+            }
         }
     }
     public void validaIdExist(Long id){
         if(!notaRepository.existsById(id)){
-            throw new CategoriaException("Id da nota não existe!");
+            throw new NotaException("Id da nota não existe!");
         }
     }
 

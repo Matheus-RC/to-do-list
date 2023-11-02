@@ -29,25 +29,23 @@ public class CategoriaValidationTest {
     CategoriaValidation categoriaValidation;
     @Mock
     CategoriaRepository categoriaRepository;
-
     @Mock
     Categoria categoriaMock;
 
     @BeforeEach
-    public void setUpCategoria(){
+    public void setUp(){
         categoriaMock = new Categoria(1L,"Teste", new ArrayList<>());
     }
     @Test
     public void testValidCategoriaNameisValid(){
         String name = "Teste";
-        categoriaValidation.validCategoriaName(name);
+        categoriaValidation.validCategoriaName(categoriaMock.getNome());
 
     }
 
     @Test
     public void testValidationNameEmpty(){
         String name = "";
-
         CategoriaException exception = assertThrows(CategoriaException.class, () -> categoriaValidation.validCategoriaName(name));
         assertEquals("O nome da categoria não pode ser vazio!", exception.getMessage());
     }
@@ -55,15 +53,13 @@ public class CategoriaValidationTest {
     @Test
     public void testValidNameShort(){
         String name = "ab";
-
         CategoriaException exception = assertThrows(CategoriaException.class, () -> categoriaValidation.validCategoriaName(name));
         assertEquals("O nome da categoria precisa ter no minímo 3 caracteres!", exception.getMessage());
 
     }
     @Test
     public void testValidNameValid(){
-        String name = "teste";
-        categoriaValidation.validCategoriaName(name);
+        categoriaValidation.validCategoriaName(categoriaMock.getNome());
     }
 
 

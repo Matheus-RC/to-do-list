@@ -15,9 +15,10 @@ public class TaskValidation {
     public void validTaskName(String name){
         if(name == null || name.isEmpty()) {
             throw new TaskException("O nome da tarefa não pode ser vazio!");
-        }
-        if(name.length() < 3) {
-            throw new TaskException("O nome da tarefa precisa ter no minímo 3 caracteres!");
+        }else {
+            if (name.length() < 3) {
+                throw new TaskException("O nome da tarefa precisa ter no minímo 3 caracteres!");
+            }
         }
     }
     public void validaIdExist(Long id){
