@@ -66,7 +66,7 @@ public class CategoriaValidationTest {
     @Test
     public void testValidNameExistWithAnotherId(){
         when(categoriaRepository.findExistNameWithIdCategoria(categoriaMock.getNome(), categoriaMock.getId_categoria()))
-                .thenReturn(Collections.singletonList(new Categoria(2L, "Categoria", new ArrayList<>())));
+                .thenReturn(Collections.singletonList(new Categoria(2L, "Teste2", new ArrayList<>())));
 
         CategoriaException exception = assertThrows(CategoriaException.class, () -> categoriaValidation.validNameExistWithAnotherId(categoriaMock));
         assertEquals("Nome da categoria já existe!", exception.getMessage());

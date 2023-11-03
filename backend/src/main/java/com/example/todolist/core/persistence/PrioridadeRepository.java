@@ -15,5 +15,5 @@ public interface PrioridadeRepository extends JpaRepository<Prioridade, Long> {
     List<Prioridade> findPrioridadeByName(@Param("name") String name);
 
     @Query("SELECT c FROM Prioridade c WHERE c.name = :name and c.id_prioridade <> :id")
-    List<Categoria> findExistNameWithIdPrioridade(@Param("name") String name, @Param("id") Long id);
+    List<Prioridade> findExistNameWithIdPrioridade(@Param("name") String name, @Param("id") Long id);
 }
