@@ -12,8 +12,8 @@ import java.util.List;
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Long> {
     @Query("SELECT name FROM Status c WHERE c.name = :name")
-    List<Categoria> findStatusByName(String name);
+    List<Status> findStatusByName(String name);
 
     @Query("SELECT c FROM Status c WHERE c.name = :name and c.id_status <> :id")
-    List<Categoria> findExistNameWithIdStatus(@Param("name") String name, @Param("id") Long id);
+    List<Status> findExistNameWithIdStatus(@Param("name") String name, @Param("id") Long id);
 }

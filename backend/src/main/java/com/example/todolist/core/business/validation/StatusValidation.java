@@ -13,15 +13,6 @@ import org.springframework.stereotype.Component;
 public class StatusValidation {
     @Autowired
     private StatusRepository statusRepository;
-    public void isValidStatusName(String nome){
-        if(nome == null || nome.isEmpty()) {
-            throw  new StatusException("O nome do status não pode ser vazio!");
-        }else {
-            if (nome.length() < 3) {
-                throw new StatusException("O nome do status precisa ter no minimo 3 caracteres!");
-            }
-        }
-    }
 
     public void validStatusName(String name){
         if(name == null || name.isEmpty()) {

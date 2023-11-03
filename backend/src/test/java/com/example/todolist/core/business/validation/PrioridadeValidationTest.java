@@ -62,6 +62,8 @@ public class PrioridadeValidationTest {
 
     @Test
     public void TestValidNameDontExistWithAnotherId(){
+        when(prioridadeRepository.findExistNameWithIdPrioridade(prioridadeMock.getName(), prioridadeMock.getId_prioridade())).
+                thenReturn(new ArrayList<>());
         prioridadeValidation.validNameExistWithAnotherId(prioridadeMock);
     }
 
